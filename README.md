@@ -2,7 +2,7 @@
 
 This is personal portfolio project.
 I created a google map application that search the nearest Gus / Electric charger stations
-
+Eletric charger stations are provided by the Openchargemap API
 
 ## How to Use
 
