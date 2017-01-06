@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gus Stations</title>
+    <style>
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        blockquote,
+        q {
+            quotes: none;
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        body {
+            background: #EEE;
+        }
+
+        #map {
+            height: 100%;
+            margin-left: 300px;
+        }
+
+        aside {
+            position: absolute;
+            height: 100%;
+            overflow-y: auto;
+            top: 0;
+            left: 0;
+            width: 300px;
+            color: #000;
+            font-size: 14px;
+            font-family: helvetica;
+        }
+
+        #stationList {
+            margin: 0;
+            padding: 0;
+        }
+
+        #filterPanel,
+        .station {
+            background: #FFF;
+            margin: 0 0 5px 0;
+            padding: 13px;
+            border-radius: 2px;
+            -webkit-box-shadow: 0px 3px 4px -2px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0px 3px 4px -2px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 3px 4px -2px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .stationName {
+            font-size: 16px;
+            line-height: 25px;
+        }
+
+        .stationAddress {
+            font-size: 12px;
+            line-height: 20px;
+            color: #AAA;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <aside>
+        <div id="filterPanel">
+            <form action="">
+                <input type="radio" name="carType" value="gus" checked onclick=changeCarType(this.value)> Gus<br>
+                <input type="radio" name="carType" value="eletric" onclick=changeCarType(this.value)> Eletric<br>
+                <input id="distance" type="range" name="points" min="1" max="10" value="10" data-bind="event: { input: setRadius }">
+                <label for="distance">radius: <span data-bind="text: distance"></span>km</label>
+            </form>
+        </div>
+
+        <div id="stationList">
+            <ol data-bind="foreach: stations">
+                <li class="station" data-bind="click: $parent.openInfo">
+                    <h4 class="stationName" data-bind="text: $data.name"></h4>
+                    <h5 class="stationAddress" data-bind="text: $data.vicinity"></h5>
+                </li>
+            </ol>
+        </div>
+    </aside>
+
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+    <script src="app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB178qw5XEjG-eDUHtvYdaIBvaT5ZzDqYw&libraries=places&callback=initMap" async defer></script>
+</body>
+
+</html>
